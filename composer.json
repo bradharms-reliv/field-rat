@@ -1,0 +1,44 @@
+{
+  "name": "reliv/field-rat",
+  "description": "Define fields, related object models and validation strategies for fields and field types",
+  "type": "library",
+  "license": "ISC",
+  "keywords": [
+    "reliv",
+    "fields",
+    "models",
+    "validation"
+  ],
+  "minimum-stability": "stable",
+  "homepage": "https://github.com/reliv/field-rat",
+  "authors": [
+    {
+      "name": "James Jervis",
+      "email": "jjervis@relivinc.com",
+      "homepage": "https://github.com/jerv13"
+    },
+    {
+      "name": "Rod McNew",
+      "email": "rmcnew@relivinc.com",
+      "homepage": "https://github.com/rodmcnew"
+    }
+  ],
+  "require": {
+    "php": ">=7",
+    "psr/cache": "^1",
+    "psr/container": "^1",
+    "reliv/array-properties": "^0",
+    "reliv/validation-rat": "^0",
+    "reliv/zf-config-factories": "3.* || 4.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.*"
+  },
+  "suggest": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Reliv\\FieldRat\\": "/src"
+    }
+  }
+}
