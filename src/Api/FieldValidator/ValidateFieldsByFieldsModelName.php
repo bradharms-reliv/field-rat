@@ -2,6 +2,7 @@
 
 namespace Reliv\FieldRat\Api\FieldValidator;
 
+use Reliv\ArrayProperties\Property;
 use Reliv\FieldRat\Api\BuildFieldsConfigNameIndex;
 use Reliv\FieldRat\Api\Field\FindFieldsByModel;
 use Reliv\FieldRat\Api\Validator\ValidateByFieldConfigValidator;
@@ -10,12 +11,11 @@ use Reliv\FieldRat\Api\Validator\ValidateByFieldTypeRequired;
 use Reliv\FieldRat\Model\FieldConfig;
 use Reliv\FieldRat\Model\FieldType;
 use Reliv\ValidationRat\Api\BuildCode;
-use Reliv\ValidationRat\Api\IsValidFieldResults;
 use Reliv\ValidationRat\Api\FieldValidator\ValidateFields;
 use Reliv\ValidationRat\Api\FieldValidator\ValidateFieldsHasOnlyRecognizedFields;
+use Reliv\ValidationRat\Api\IsValidFieldResults;
 use Reliv\ValidationRat\Model\ValidationResultFields;
 use Reliv\ValidationRat\Model\ValidationResultFieldsBasic;
-use Reliv\ArrayProperties\Property;
 
 /**
  * @author James Jervis - https://github.com/jerv13
@@ -175,7 +175,10 @@ class ValidateFieldsByFieldsModelName implements ValidateFields
             if ($required) {
                 $requiredValidationResult = $this->validateByFieldTypeRequired->__invoke(
                     $value,
-                    [ValidateByFieldTypeRequired::OPTION_FIELD_TYPE => $type]
+                    [
+                        ValidateByFieldTypeRequired::OPTION_FIELD_TYPE => $type,
+                        ValidateByFieldTypeRequired::OPTION_FIELD_CONFIG => $fieldConfig
+                    ]
                 );
             }
 
@@ -186,7 +189,10 @@ class ValidateFieldsByFieldsModelName implements ValidateFields
 
             $validationResult = $this->validateByFieldType->__invoke(
                 $value,
-                [ValidateByFieldType::OPTION_FIELD_TYPE => $type]
+                [
+                    ValidateByFieldType::OPTION_FIELD_TYPE => $type,
+                    ValidateByFieldType::OPTION_FIELD_CONFIG => $fieldConfig
+                ]
             );
 
             if (!$validationResult->isValid()) {
@@ -202,7 +208,11 @@ class ValidateFieldsByFieldsModelName implements ValidateFields
 
             $fieldResults[$fieldName] = $this->validateByFieldConfigValidator->__invoke(
                 $value,
-                [ValidateByFieldConfigValidator::OPTION_FIELD_CONFIG_OPTIONS => $options]
+                [
+                    ValidateByFieldType::OPTION_FIELD_TYPE => $type,
+                    ValidateByFieldType::OPTION_FIELD_CONFIG => $fieldConfig,
+                    ValidateByFieldConfigValidator::OPTION_FIELD_CONFIG_OPTIONS => $options
+                ]
             );
         }
 

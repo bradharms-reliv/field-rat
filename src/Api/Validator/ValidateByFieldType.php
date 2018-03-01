@@ -3,6 +3,7 @@
 namespace Reliv\FieldRat\Api\Validator;
 
 use Psr\Container\ContainerInterface;
+use Reliv\FieldRat\Api\BuildFieldRatValidationResult;
 use Reliv\FieldRat\Api\FieldType\FindFieldType;
 use Reliv\FieldRat\Model\FieldTypeConfig;
 use Reliv\ValidationRat\Api\Validator\Validate;
@@ -15,7 +16,8 @@ use Reliv\ArrayProperties\Property;
  */
 class ValidateByFieldType implements Validate
 {
-    const OPTION_FIELD_TYPE = 'field-type';
+    const OPTION_FIELD_CONFIG = BuildFieldRatValidationResult::OPTION_FIELD_CONFIG;
+    const OPTION_FIELD_TYPE = BuildFieldRatValidationResult::OPTION_FIELD_TYPE;
 
     protected $serviceContainer;
     protected $findFieldType;
@@ -73,9 +75,12 @@ class ValidateByFieldType implements Validate
             FieldTypeConfig::VALIDATOR_OPTIONS
         );
 
-        return $validator->__invoke(
-            $value,
-            $validatorOptions
+        return BuildFieldRatValidationResult::invoke(
+            $validator->__invoke(
+                $value,
+                $validatorOptions
+            ),
+            $options
         );
     }
 }
