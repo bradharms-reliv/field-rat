@@ -48,7 +48,7 @@ class BuildFieldRatValidationResult
         $details[static::DETAIL_FIELD_CONFIG] = $fieldConfig;
 
         if ($validationResult instanceof ValidationResultFields) {
-            new ValidationResultFieldsBasic(
+            return new ValidationResultFieldsBasic(
                 $validationResult->isValid(),
                 $validationResult->getCode(),
                 $validationResult->getFieldResults(),
@@ -56,7 +56,7 @@ class BuildFieldRatValidationResult
             );
         }
 
-        new ValidationResultBasic(
+        return new ValidationResultBasic(
             $validationResult->isValid(),
             $validationResult->getCode(),
             $details
