@@ -4,6 +4,7 @@ namespace Reliv\FieldRat\Api\Validator;
 
 use Psr\Container\ContainerInterface;
 use Reliv\ArrayProperties\Property;
+use Reliv\FieldRat\Api\BuildFieldRatValidationOptions;
 use Reliv\FieldRat\Api\BuildFieldRatValidationResult;
 use Reliv\FieldRat\Api\FieldType\FindFieldType;
 use Reliv\FieldRat\Model\FieldTypeConfig;
@@ -71,8 +72,11 @@ class ValidateByFieldTypeRequired implements Validate
             )
         );
 
-        $validatorOptions = $fieldTypeObject->findProperty(
-            FieldTypeConfig::VALIDATOR_REQUIRED_OPTIONS
+        $validatorOptions = BuildFieldRatValidationOptions::invoke(
+            $fieldTypeObject->findProperty(
+                FieldTypeConfig::VALIDATOR_REQUIRED_OPTIONS
+            ),
+            $options
         );
 
         return BuildFieldRatValidationResult::invoke(

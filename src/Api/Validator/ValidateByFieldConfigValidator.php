@@ -3,6 +3,7 @@
 namespace Reliv\FieldRat\Api\Validator;
 
 use Psr\Container\ContainerInterface;
+use Reliv\FieldRat\Api\BuildFieldRatValidationOptions;
 use Reliv\FieldRat\Api\BuildFieldRatValidationResult;
 use Reliv\ValidationRat\Api\Validator\Validate;
 use Reliv\ValidationRat\Api\FieldValidator\ValidateFields;
@@ -65,14 +66,19 @@ class ValidateByFieldConfigValidator implements Validate
         /** @var Validate|ValidateFields $validator */
         $validator = $this->serviceContainer->get($validatorServiceName);
 
+        $validatorOptions = BuildFieldRatValidationOptions::invoke(
+            Property::getArray(
+                $fieldConfigOptions,
+                static::OPTION_FIELD_CONFIG_OPTIONS_VALIDATOR_OPTIONS,
+                []
+            ),
+            $options
+        );
+
         return BuildFieldRatValidationResult::invoke(
             $validator->__invoke(
                 $value,
-                Property::getArray(
-                    $fieldConfigOptions,
-                    static::OPTION_FIELD_CONFIG_OPTIONS_VALIDATOR_OPTIONS,
-                    []
-                )
+                $validatorOptions
             ),
             $options
         );
