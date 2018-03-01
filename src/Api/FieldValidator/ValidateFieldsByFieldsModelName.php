@@ -166,7 +166,7 @@ class ValidateFieldsByFieldsModelName implements ValidateFields
 
             $type = Property::getString(
                 $fieldConfig,
-                FieldConfig::REQUIRED,
+                FieldConfig::TYPE,
                 FieldType::DEFAULT_TYPE
             );
 
