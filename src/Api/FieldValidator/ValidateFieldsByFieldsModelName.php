@@ -23,7 +23,6 @@ use Reliv\ArrayProperties\Property;
 class ValidateFieldsByFieldsModelName implements ValidateFields
 {
     const OPTION_FIELDS_MODEL_NAME = 'fields-model-name';
-    const OPTION_FIELDS_ALLOWED = ValidateFieldsHasOnlyRecognizedFields::OPTION_FIELDS_ALLOWED;
 
     const DEFAULT_INVALID_CODE = 'invalid-fields-for-fields-config';
 
@@ -93,7 +92,8 @@ class ValidateFieldsByFieldsModelName implements ValidateFields
         $validationResult = $this->validateFieldsHasOnlyRecognizedFields->__invoke(
             $fields,
             [
-                static::OPTION_FIELDS_ALLOWED => $this->buildRecognizedFields($fieldsConfigByName)
+                ValidateFieldsHasOnlyRecognizedFields::OPTION_FIELDS_ALLOWED
+                => $this->buildRecognizedFields($fieldsConfigByName)
             ]
         );
 
