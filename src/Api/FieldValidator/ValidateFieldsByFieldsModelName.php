@@ -1,8 +1,12 @@
 <?php
 
-namespace Reliv\FieldRat\Api;
+namespace Reliv\FieldRat\Api\FieldValidator;
 
+use Reliv\FieldRat\Api\BuildFieldsConfigNameIndex;
 use Reliv\FieldRat\Api\Field\FindFieldsByModel;
+use Reliv\FieldRat\Api\Validator\ValidateByFieldConfigValidator;
+use Reliv\FieldRat\Api\Validator\ValidateByFieldType;
+use Reliv\FieldRat\Api\Validator\ValidateByFieldTypeRequired;
 use Reliv\FieldRat\Model\FieldConfig;
 use Reliv\FieldRat\Model\FieldType;
 use Reliv\ValidationRat\Api\BuildCode;

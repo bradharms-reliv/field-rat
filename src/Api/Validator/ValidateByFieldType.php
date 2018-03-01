@@ -1,6 +1,6 @@
 <?php
 
-namespace Reliv\FieldRat\Api;
+namespace Reliv\FieldRat\Api\Validator;
 
 use Psr\Container\ContainerInterface;
 use Reliv\FieldRat\Api\FieldType\FindFieldType;
@@ -13,7 +13,7 @@ use Reliv\ArrayProperties\Property;
 /**
  * @author James Jervis - https://github.com/jerv13
  */
-class ValidateByFieldTypeRequired implements Validate
+class ValidateByFieldType implements Validate
 {
     const OPTION_FIELD_TYPE = 'field-type';
 
@@ -65,12 +65,12 @@ class ValidateByFieldTypeRequired implements Validate
         /** @var Validate|ValidateFields $validator */
         $validator = $this->serviceContainer->get(
             $fieldTypeObject->findProperty(
-                FieldTypeConfig::VALIDATOR_REQUIRED
+                FieldTypeConfig::VALIDATOR
             )
         );
 
         $validatorOptions = $fieldTypeObject->findProperty(
-            FieldTypeConfig::VALIDATOR_REQUIRED_OPTIONS
+            FieldTypeConfig::VALIDATOR_OPTIONS
         );
 
         return $validator->__invoke(

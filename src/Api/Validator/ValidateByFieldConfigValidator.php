@@ -1,35 +1,32 @@
 <?php
 
-namespace Reliv\FieldRat\Api;
+namespace Reliv\FieldRat\Api\Validator;
 
 use Psr\Container\ContainerInterface;
-use Reliv\FieldRat\Api\FieldType\FindFieldType;
-use Reliv\FieldRat\Model\FieldTypeConfig;
 use Reliv\ValidationRat\Api\Validator\Validate;
 use Reliv\ValidationRat\Api\FieldValidator\ValidateFields;
 use Reliv\ValidationRat\Model\ValidationResult;
+use Reliv\ValidationRat\Model\ValidationResultBasic;
 use Reliv\ArrayProperties\Property;
 
 /**
  * @author James Jervis - https://github.com/jerv13
  */
-class ValidateByFieldType implements Validate
+class ValidateByFieldConfigValidator implements Validate
 {
-    const OPTION_FIELD_TYPE = 'field-type';
+    const OPTION_FIELD_CONFIG_OPTIONS = 'field-config-options';
+    const OPTION_FIELD_CONFIG_OPTIONS_VALIDATOR = 'validator';
+    const OPTION_FIELD_CONFIG_OPTIONS_VALIDATOR_OPTIONS = 'validator-options';
 
     protected $serviceContainer;
-    protected $findFieldType;
 
     /**
      * @param ContainerInterface $serviceContainer
-     * @param FindFieldType      $findFieldType
      */
     public function __construct(
-        ContainerInterface $serviceContainer,
-        FindFieldType $findFieldType
+        ContainerInterface $serviceContainer
     ) {
         $this->serviceContainer = $serviceContainer;
-        $this->findFieldType = $findFieldType;
     }
 
     /**
@@ -47,35 +44,31 @@ class ValidateByFieldType implements Validate
         $value,
         array $options = []
     ): ValidationResult {
-        $fieldType = Property::getRequired(
+        $fieldConfigOptions = Property::getRequired(
             $options,
-            static::OPTION_FIELD_TYPE
+            static::OPTION_FIELD_CONFIG_OPTIONS
         );
 
-        $fieldTypeObject = $this->findFieldType->__invoke(
-            $fieldType
+        $validatorServiceName = Property::getString(
+            $fieldConfigOptions,
+            static::OPTION_FIELD_CONFIG_OPTIONS_VALIDATOR
         );
 
-        if (empty($fieldTypeObject)) {
-            throw new \Exception(
-                'Field type: (' . $fieldType . ') not found'
-            );
+        if (empty($validatorServiceName)) {
+            // No validator means nothing to validate
+            return new ValidationResultBasic();
         }
 
         /** @var Validate|ValidateFields $validator */
-        $validator = $this->serviceContainer->get(
-            $fieldTypeObject->findProperty(
-                FieldTypeConfig::VALIDATOR
-            )
-        );
-
-        $validatorOptions = $fieldTypeObject->findProperty(
-            FieldTypeConfig::VALIDATOR_OPTIONS
-        );
+        $validator = $this->serviceContainer->get($validatorServiceName);
 
         return $validator->__invoke(
             $value,
-            $validatorOptions
+            Property::getArray(
+                $fieldConfigOptions,
+                static::OPTION_FIELD_CONFIG_OPTIONS_VALIDATOR_OPTIONS,
+                []
+            )
         );
     }
 }

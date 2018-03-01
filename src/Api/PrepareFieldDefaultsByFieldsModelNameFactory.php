@@ -4,6 +4,7 @@ namespace Reliv\FieldRat\Api;
 
 use Psr\Container\ContainerInterface;
 use Reliv\FieldRat\Api\Field\FindFieldsByModel;
+use Reliv\FieldRat\Api\Validator\ValidateByFieldTypeRequired;
 
 /**
  * @author James Jervis - https://github.com/jerv13

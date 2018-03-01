@@ -2,6 +2,7 @@
 
 namespace Reliv\FieldRat\Api\FieldType;
 
+use Reliv\FieldRat\Model\FieldType;
 use Reliv\FieldRat\Model\FieldTypeBasic;
 
 /**

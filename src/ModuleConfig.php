@@ -14,16 +14,16 @@ use Reliv\FieldRat\Api\FieldType\FindFieldType;
 use Reliv\FieldRat\Api\FieldType\FindFieldTypeBasicFactory;
 use Reliv\FieldRat\Api\FieldType\ListFieldTypes;
 use Reliv\FieldRat\Api\FieldType\ListFieldTypesBasicFactory;
+use Reliv\FieldRat\Api\FieldValidator\ValidateFieldsByFieldsModelName;
+use Reliv\FieldRat\Api\FieldValidator\ValidateFieldsByFieldsModelNameFactory;
 use Reliv\FieldRat\Api\PrepareFieldDefaults;
 use Reliv\FieldRat\Api\PrepareFieldDefaultsByFieldsModelNameFactory;
-use Reliv\FieldRat\Api\ValidateByFieldConfigValidator;
-use Reliv\FieldRat\Api\ValidateByFieldConfigValidatorFactory;
-use Reliv\FieldRat\Api\ValidateByFieldType;
-use Reliv\FieldRat\Api\ValidateByFieldTypeFactory;
-use Reliv\FieldRat\Api\ValidateByFieldTypeRequired;
-use Reliv\FieldRat\Api\ValidateByFieldTypeRequiredFactory;
-use Reliv\FieldRat\Api\ValidateFieldsByFieldsModelName;
-use Reliv\FieldRat\Api\ValidateFieldsByFieldsModelNameFactory;
+use Reliv\FieldRat\Api\Validator\ValidateByFieldConfigValidator;
+use Reliv\FieldRat\Api\Validator\ValidateByFieldConfigValidatorFactory;
+use Reliv\FieldRat\Api\Validator\ValidateByFieldType;
+use Reliv\FieldRat\Api\Validator\ValidateByFieldTypeFactory;
+use Reliv\FieldRat\Api\Validator\ValidateByFieldTypeRequired;
+use Reliv\FieldRat\Api\Validator\ValidateByFieldTypeRequiredFactory;
 
 /**
  * @author James Jervis - https://github.com/jerv13
@@ -38,6 +38,9 @@ class ModuleConfig
         return [
             'dependencies' => [
                 'config_factories' => [
+                    /**
+                     * Api/Field
+                     */
                     FieldsToArray::class => [
                         'factory' => FieldsToArrayBasicFactory::class,
                     ],
@@ -47,6 +50,10 @@ class ModuleConfig
                     FindFieldsByModel::class => [
                         'factory' => FindFieldsByModelBasicFactory::class,
                     ],
+
+                    /**
+                     * Api/FieldType
+                     */
                     FieldTypeToArray::class => [
                         'factory' => FieldTypeToArrayBasicFactory::class,
                     ],
@@ -56,9 +63,17 @@ class ModuleConfig
                     ListFieldTypes::class => [
                         'factory' => ListFieldTypesBasicFactory::class,
                     ],
-                    PrepareFieldDefaults::class => [
-                        'factory' => PrepareFieldDefaultsByFieldsModelNameFactory::class,
+
+                    /**
+                     * Api/FieldValidator
+                     */
+                    ValidateFieldsByFieldsModelName::class => [
+                        'factory' => ValidateFieldsByFieldsModelNameFactory::class,
                     ],
+
+                    /**
+                     * Api/Validator
+                     */
                     ValidateByFieldConfigValidator::class => [
                         'factory' => ValidateByFieldConfigValidatorFactory::class,
                     ],
@@ -68,8 +83,12 @@ class ModuleConfig
                     ValidateByFieldTypeRequired::class => [
                         'factory' => ValidateByFieldTypeRequiredFactory::class,
                     ],
-                    ValidateFieldsByFieldsModelName::class => [
-                        'factory' => ValidateFieldsByFieldsModelNameFactory::class,
+
+                    /**
+                     * Api
+                     */
+                    PrepareFieldDefaults::class => [
+                        'factory' => PrepareFieldDefaultsByFieldsModelNameFactory::class,
                     ],
                 ],
             ],
