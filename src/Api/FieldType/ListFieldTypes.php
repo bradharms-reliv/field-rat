@@ -1,4 +1,5 @@
 <?php
+
 namespace Reliv\FieldRat\Api\FieldType;
 
 use Reliv\FieldRat\Model\FieldType;
@@ -15,5 +16,5 @@ interface ListFieldTypes
      */
     public function __invoke(
         array $options = []
-    ):array;
+    ): array;
 }

@@ -47,7 +47,7 @@ class ValidateByFieldTypeRequired implements Validate
         $value,
         array $options = []
     ): ValidationResult {
-        $fieldType = Property::getRequired(
+        $fieldType = (string)Property::getRequired(
             $options,
             static::OPTION_FIELD_TYPE
         );
