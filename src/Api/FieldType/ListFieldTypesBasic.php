@@ -37,6 +37,7 @@ class ListFieldTypesBasic implements ListFieldTypes
             if (!is_string($name)) {
                 throw new \Exception(
                     'Field type name must be a string, got ' . Json::encode($name)
+                    . ' with value: ' . Json::encode($fieldTypeConfig)
                 );
             }
             if (!is_array($fieldTypeConfig)) {
