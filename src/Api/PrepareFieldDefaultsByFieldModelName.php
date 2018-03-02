@@ -3,6 +3,7 @@
 namespace Reliv\FieldRat\Api;
 
 use Reliv\FieldRat\Api\Field\FindFieldsByModel;
+use Reliv\FieldRat\Api\Validator\ValidateByFieldTypeRequired;
 use Reliv\FieldRat\Model\FieldConfig;
 use Reliv\FieldRat\Model\FieldType;
 use Reliv\ArrayProperties\Property;

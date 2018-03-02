@@ -28,6 +28,7 @@
     "psr/cache": "^1",
     "psr/container": "^1",
     "reliv/array-properties": "^0",
+    "reliv/json": "^0",
     "reliv/validation-rat": "^0",
     "reliv/zf-config-factories": "3.* || 4.*"
   },

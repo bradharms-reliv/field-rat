@@ -1,6 +1,6 @@
 <?php
 
-namespace Reliv\FieldRat\Api;
+namespace Reliv\FieldRat\Api\Validator;
 
 use Psr\Container\ContainerInterface;
 use Reliv\FieldRat\Api\FieldType\FindFieldType;
@@ -8,19 +8,19 @@ use Reliv\FieldRat\Api\FieldType\FindFieldType;
 /**
  * @author James Jervis - https://github.com/jerv13
  */
-class ValidateByFieldTypeRequiredFactory
+class ValidateByFieldTypeFactory
 {
     /**
      * @param ContainerInterface $serviceContainer
      *
-     * @return ValidateByFieldTypeRequired
+     * @return ValidateByFieldType
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function __invoke(
         ContainerInterface $serviceContainer
     ) {
-        return new ValidateByFieldTypeRequired(
+        return new ValidateByFieldType(
             $serviceContainer,
             $serviceContainer->get(FindFieldType::class)
         );

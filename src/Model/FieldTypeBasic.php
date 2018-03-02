@@ -7,5 +7,17 @@ namespace Reliv\FieldRat\Model;
  */
 class FieldTypeBasic extends FieldTypeAbstract implements FieldType
 {
-
+    /**
+     * @param string $type
+     * @param array  $properties
+     */
+    public function __construct(
+        string $type,
+        array $properties
+    ) {
+        parent::__construct(
+            $type,
+            $properties
+        );
+    }
 }

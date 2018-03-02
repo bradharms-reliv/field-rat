@@ -1,26 +1,28 @@
 <?php
 
-namespace Reliv\FieldRat\Api;
+namespace Reliv\FieldRat\Api\Validator;
 
 use Psr\Container\ContainerInterface;
+use Reliv\FieldRat\Api\FieldType\FindFieldType;
 
 /**
  * @author James Jervis - https://github.com/jerv13
  */
-class ValidateByFieldConfigValidatorFactory
+class ValidateByFieldTypeRequiredFactory
 {
     /**
      * @param ContainerInterface $serviceContainer
      *
-     * @return ValidateByFieldConfigValidator
+     * @return ValidateByFieldTypeRequired
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function __invoke(
         ContainerInterface $serviceContainer
     ) {
-        return new ValidateByFieldConfigValidator(
-            $serviceContainer
+        return new ValidateByFieldTypeRequired(
+            $serviceContainer,
+            $serviceContainer->get(FindFieldType::class)
         );
     }
 }

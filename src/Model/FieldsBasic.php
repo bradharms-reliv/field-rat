@@ -7,5 +7,13 @@ namespace Reliv\FieldRat\Model;
  */
 class FieldsBasic extends FieldsAbstract implements Fields
 {
-
+    /**
+     * @param array $fieldsConfig
+     *
+     * @throws \Exception
+     */
+    public function __construct(array $fieldsConfig)
+    {
+        parent::__construct($fieldsConfig);
+    }
 }

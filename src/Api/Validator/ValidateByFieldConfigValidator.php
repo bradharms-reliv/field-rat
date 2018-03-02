@@ -1,8 +1,10 @@
 <?php
 
-namespace Reliv\FieldRat\Api;
+namespace Reliv\FieldRat\Api\Validator;
 
 use Psr\Container\ContainerInterface;
+use Reliv\FieldRat\Api\BuildFieldRatValidationOptions;
+use Reliv\FieldRat\Api\BuildFieldRatValidationResult;
 use Reliv\ValidationRat\Api\Validator\Validate;
 use Reliv\ValidationRat\Api\FieldValidator\ValidateFields;
 use Reliv\ValidationRat\Model\ValidationResult;
@@ -14,6 +16,8 @@ use Reliv\ArrayProperties\Property;
  */
 class ValidateByFieldConfigValidator implements Validate
 {
+    const OPTION_FIELD_CONFIG = BuildFieldRatValidationResult::OPTION_FIELD_CONFIG;
+    const OPTION_FIELD_TYPE = BuildFieldRatValidationOptions::OPTION_FIELD_TYPE;
     const OPTION_FIELD_CONFIG_OPTIONS = 'field-config-options';
     const OPTION_FIELD_CONFIG_OPTIONS_VALIDATOR = 'validator';
     const OPTION_FIELD_CONFIG_OPTIONS_VALIDATOR_OPTIONS = 'validator-options';
@@ -62,13 +66,21 @@ class ValidateByFieldConfigValidator implements Validate
         /** @var Validate|ValidateFields $validator */
         $validator = $this->serviceContainer->get($validatorServiceName);
 
-        return $validator->__invoke(
-            $value,
+        $validatorOptions = BuildFieldRatValidationOptions::invoke(
             Property::getArray(
                 $fieldConfigOptions,
                 static::OPTION_FIELD_CONFIG_OPTIONS_VALIDATOR_OPTIONS,
                 []
-            )
+            ),
+            $options
+        );
+
+        return BuildFieldRatValidationResult::invoke(
+            $validator->__invoke(
+                $value,
+                $validatorOptions
+            ),
+            $options
         );
     }
 }
