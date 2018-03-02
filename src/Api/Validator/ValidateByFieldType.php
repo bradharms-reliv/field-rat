@@ -79,8 +79,6 @@ class ValidateByFieldType implements Validate
             $options
         );
 
-        ddd($validatorOptions);
-
         return BuildFieldRatValidationResult::invoke(
             $validator->__invoke(
                 $value,
