@@ -18,7 +18,7 @@ use Reliv\ValidationRat\Model\ValidationResult;
 class ValidateByFieldTypeRequired implements Validate
 {
     const OPTION_FIELD_CONFIG = BuildFieldRatValidationResult::OPTION_FIELD_CONFIG;
-    const OPTION_FIELD_TYPE = BuildFieldRatValidationResult::OPTION_FIELD_TYPE;
+    const OPTION_FIELD_TYPE = BuildFieldRatValidationOptions::OPTION_FIELD_TYPE;
 
     protected $serviceContainer;
     protected $findFieldType;

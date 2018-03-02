@@ -17,7 +17,7 @@ use Reliv\ArrayProperties\Property;
 class ValidateByFieldConfigValidator implements Validate
 {
     const OPTION_FIELD_CONFIG = BuildFieldRatValidationResult::OPTION_FIELD_CONFIG;
-    const OPTION_FIELD_TYPE = BuildFieldRatValidationResult::OPTION_FIELD_TYPE;
+    const OPTION_FIELD_TYPE = BuildFieldRatValidationOptions::OPTION_FIELD_TYPE;
     const OPTION_FIELD_CONFIG_OPTIONS = 'field-config-options';
     const OPTION_FIELD_CONFIG_OPTIONS_VALIDATOR = 'validator';
     const OPTION_FIELD_CONFIG_OPTIONS_VALIDATOR_OPTIONS = 'validator-options';

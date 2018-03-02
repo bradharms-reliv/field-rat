@@ -13,7 +13,6 @@ use Reliv\ValidationRat\Model\ValidationResultFieldsBasic;
  */
 class BuildFieldRatValidationResult
 {
-    const OPTION_FIELD_TYPE = BuildFieldRatValidationOptions::OPTION_FIELD_TYPE;
     const OPTION_FIELD_CONFIG = BuildFieldRatValidationOptions::OPTION_FIELD_CONFIG;
 
     const DETAIL_FIELD_TYPE = 'field-rat-field-type';
@@ -34,17 +33,11 @@ class BuildFieldRatValidationResult
             static::OPTION_FIELD_CONFIG
         );
 
-        $fieldType = Property::getString(
-            $options,
-            static::OPTION_FIELD_TYPE
-        );
-
-        if (empty($fieldConfig) && empty($fieldType)) {
+        if (empty($fieldConfig)) {
             return $validationResult;
         }
 
         $details = $validationResult->getDetails();
-        $details[static::DETAIL_FIELD_TYPE] = $fieldType;
         $details[static::DETAIL_FIELD_CONFIG] = $fieldConfig;
 
         if ($validationResult instanceof ValidationResultFields) {

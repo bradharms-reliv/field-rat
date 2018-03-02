@@ -18,7 +18,7 @@ use Reliv\ArrayProperties\Property;
 class ValidateByFieldType implements Validate
 {
     const OPTION_FIELD_CONFIG = BuildFieldRatValidationResult::OPTION_FIELD_CONFIG;
-    const OPTION_FIELD_TYPE = BuildFieldRatValidationResult::OPTION_FIELD_TYPE;
+    const OPTION_FIELD_TYPE = BuildFieldRatValidationOptions::OPTION_FIELD_TYPE;
 
     protected $serviceContainer;
     protected $findFieldType;
@@ -78,6 +78,8 @@ class ValidateByFieldType implements Validate
             ),
             $options
         );
+
+        ddd($validatorOptions);
 
         return BuildFieldRatValidationResult::invoke(
             $validator->__invoke(

@@ -12,7 +12,6 @@ class BuildFieldRatValidationOptions
     const OPTION_FIELD_TYPE = 'field-type';
     const OPTION_FIELD_CONFIG = 'field-config';
 
-    const VALIDATOR_OPTION_FIELD_TYPE = 'field-rat-field-type';
     const VALIDATOR_OPTION_FIELD_CONFIG = 'field-rat-field-config';
 
     /**
@@ -30,16 +29,10 @@ class BuildFieldRatValidationOptions
             static::OPTION_FIELD_CONFIG
         );
 
-        $fieldType = Property::getString(
-            $options,
-            static::OPTION_FIELD_TYPE
-        );
-
-        if (empty($fieldConfig) && empty($fieldType)) {
+        if (empty($fieldConfig)) {
             return $validatorOptions;
         }
 
-        $validatorOptions[self::VALIDATOR_OPTION_FIELD_TYPE] = $fieldConfig;
         $validatorOptions[self::VALIDATOR_OPTION_FIELD_CONFIG] = $fieldConfig;
 
         return $validatorOptions;
