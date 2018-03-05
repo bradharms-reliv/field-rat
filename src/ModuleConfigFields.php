@@ -3,14 +3,15 @@
 namespace Reliv\FieldRat;
 
 use Reliv\ValidationRat\Api\FieldValidator\ValidateFieldsByStrategy;
-use Reliv\ValidationRat\Api\Validator\ValidateIsArray;
-use Reliv\ValidationRat\Api\Validator\ValidateIsBoolean;
+use Reliv\ValidationRat\Api\Validator\ValidateIsAnyValue;
+use Reliv\ValidationRat\Api\Validator\ValidateIsArrayOrNull;
+use Reliv\ValidationRat\Api\Validator\ValidateIsBooleanOrNull;
 use Reliv\ValidationRat\Api\Validator\ValidateIsClass;
-use Reliv\ValidationRat\Api\Validator\ValidateIsInt;
+use Reliv\ValidationRat\Api\Validator\ValidateIsIntOrNull;
 use Reliv\ValidationRat\Api\Validator\ValidateIsNotEmpty;
-use Reliv\ValidationRat\Api\Validator\ValidateIsObject;
+use Reliv\ValidationRat\Api\Validator\ValidateIsObjectOrNull;
 use Reliv\ValidationRat\Api\Validator\ValidateIsRealValue;
-use Reliv\ValidationRat\Api\Validator\ValidateIsString;
+use Reliv\ValidationRat\Api\Validator\ValidateIsStringOrNull;
 
 /**
  * @author James Jervis - https://github.com/jerv13
@@ -46,13 +47,13 @@ class ModuleConfigFields
              */
             'field-rat-field-types' => [
                 'array' => [
-                    'validator' => ValidateIsArray::class,
+                    'validator' => ValidateIsArrayOrNull::class,
                     'validator-options' => [],
                     'validator-required' => ValidateIsRealValue::class,
                     'validator-required-options' => [],
                 ],
                 'bool' => [
-                    'validator' => ValidateIsBoolean::class,
+                    'validator' => ValidateIsBooleanOrNull::class,
                     'validator-options' => [],
                     'validator-required' => ValidateIsRealValue::class,
                     'validator-required-options' => [],
@@ -65,42 +66,49 @@ class ModuleConfigFields
                 ],
                 'fields' => [
                     'validator' => ValidateFieldsByStrategy::class,
-                    'validator-options' => [],
-                    'validator-required' => ValidateIsRealValue::class,
-                    'validator-required-options' => [],
+                    'validator-options' => [// Details required],
+                        'validator-required' => ValidateIsRealValue::class,
+                        'validator-required-options' => [],
+                    ],
                 ],
                 'id' => [
-                    'validator' => ValidateIsNotEmpty::class,
+                    'validator' => ValidateIsAnyValue::class,
                     'validator-options' => [],
                     'validator-required' => ValidateIsRealValue::class,
                     'validator-required-options' => [],
                 ],
                 'id-string' => [
-                    'validator' => ValidateIsString::class,
+                    'validator' => ValidateIsStringOrNull::class,
                     'validator-options' => [],
                     'validator-required' => ValidateIsRealValue::class,
                     'validator-required-options' => [],
                 ],
                 'id-int' => [
-                    'validator' => ValidateIsInt::class,
+                    'validator' => ValidateIsIntOrNull::class,
+                    'validator-options' => [],
+                    'validator-required' => ValidateIsRealValue::class,
+                    'validator-required-options' => [],
+                ],
+                'image' => [
+                    'validator' => ValidateIsStringOrNull::class,
                     'validator-options' => [],
                     'validator-required' => ValidateIsRealValue::class,
                     'validator-required-options' => [],
                 ],
                 'object' => [
-                    'validator' => ValidateIsObject::class,
+                    'validator' => ValidateIsObjectOrNull::class,
                     'validator-options' => [],
                     'validator-required' => ValidateIsRealValue::class,
                     'validator-required-options' => [],
                 ],
                 'string' => [
-                    'validator' => ValidateIsString::class,
+                    'validator' => ValidateIsStringOrNull::class,
                     'validator-options' => [],
                     'validator-required' => ValidateIsRealValue::class,
                     'validator-required-options' => [],
                 ],
                 'text' => [
-                    'validator' => ValidateIsString::class,
+                    'validator' => ValidateIsStringOrNull::class,
                     'validator-options' => [],
                     'validator-required' => ValidateIsRealValue::class,
                     'validator-required-options' => [],
