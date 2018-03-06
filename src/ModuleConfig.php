@@ -8,6 +8,8 @@ use Reliv\FieldRat\Api\Field\FieldToArray;
 use Reliv\FieldRat\Api\Field\FieldToArrayBasicFactory;
 use Reliv\FieldRat\Api\Field\FindFieldsByModel;
 use Reliv\FieldRat\Api\Field\FindFieldsByModelBasicFactory;
+use Reliv\FieldRat\Api\FieldType\FieldTypesToArray;
+use Reliv\FieldRat\Api\FieldType\FieldTypesToArrayBasicFactory;
 use Reliv\FieldRat\Api\FieldType\FieldTypeToArray;
 use Reliv\FieldRat\Api\FieldType\FieldTypeToArrayBasicFactory;
 use Reliv\FieldRat\Api\FieldType\FindFieldType;
@@ -54,6 +56,9 @@ class ModuleConfig
                     /**
                      * Api/FieldType
                      */
+                    FieldTypesToArray::class => [
+                        'factory' => FieldTypesToArrayBasicFactory::class,
+                    ],
                     FieldTypeToArray::class => [
                         'factory' => FieldTypeToArrayBasicFactory::class,
                     ],
