@@ -16,6 +16,7 @@ class FindFieldsByModelBasic implements FindFieldsByModel
 
     /**
      * @param array $fieldsModelConfig
+     * @param array $fieldsModelExtendsConfig
      * @param array $fieldsModelFieldsConfig
      */
     public function __construct(
@@ -102,6 +103,5 @@ class FindFieldsByModelBasic implements FindFieldsByModel
             $extendsModelConfig,
             $fieldsConfig
         );
-
     }
 }
