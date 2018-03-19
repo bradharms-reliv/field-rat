@@ -8,7 +8,6 @@ use Reliv\ValidationRat\Api\Validator\ValidateIsArrayOrNull;
 use Reliv\ValidationRat\Api\Validator\ValidateIsBooleanOrNull;
 use Reliv\ValidationRat\Api\Validator\ValidateIsClass;
 use Reliv\ValidationRat\Api\Validator\ValidateIsIntOrNull;
-use Reliv\ValidationRat\Api\Validator\ValidateIsNotEmpty;
 use Reliv\ValidationRat\Api\Validator\ValidateIsObjectOrNull;
 use Reliv\ValidationRat\Api\Validator\ValidateIsRealValue;
 use Reliv\ValidationRat\Api\Validator\ValidateIsStringOrNull;
@@ -66,10 +65,9 @@ class ModuleConfigFields
                 ],
                 'fields' => [
                     'validator' => ValidateFieldsByStrategy::class,
-                    'validator-options' => [// Details required],
-                        'validator-required' => ValidateIsRealValue::class,
-                        'validator-required-options' => [],
-                    ],
+                    'validator-options' => [/* Details required */],
+                    'validator-required' => ValidateIsRealValue::class,
+                    'validator-required-options' => [],
                 ],
                 'id' => [
                     'validator' => ValidateIsAnyValue::class,

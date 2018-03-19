@@ -65,12 +65,19 @@ class ValidateByFieldTypeRequired implements Validate
             );
         }
 
-        /** @var Validate|ValidateFields $validator */
-        $validator = $this->serviceContainer->get(
-            $fieldTypeObject->findProperty(
-                FieldTypeConfig::VALIDATOR_REQUIRED
-            )
+        $validatorServiceName = $fieldTypeObject->findProperty(
+            FieldTypeConfig::VALIDATOR_REQUIRED
         );
+
+        if (empty($validatorServiceName)) {
+            throw new \Exception(
+                'Field required validator: (' . $validatorServiceName . ') not found'
+                . ' for field type: (' . $fieldType . ') not found'
+            );
+        }
+
+        /** @var Validate|ValidateFields $validator */
+        $validator = $this->serviceContainer->get($validatorServiceName);
 
         $validatorOptions = BuildFieldRatValidationOptions::invoke(
             $fieldTypeObject->findProperty(
