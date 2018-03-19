@@ -2,6 +2,8 @@
 
 namespace Reliv\FieldRat;
 
+use Reliv\FieldRat\Api\FieldValidator\ValidateFieldsByFieldOptionsFieldsConfig;
+use Reliv\FieldRat\Api\FieldValidator\ValidateFieldsByFieldsConfig;
 use Reliv\ValidationRat\Api\FieldValidator\ValidateFieldsByStrategy;
 use Reliv\ValidationRat\Api\Validator\ValidateIsAnyValue;
 use Reliv\ValidationRat\Api\Validator\ValidateIsArrayOrNull;
@@ -64,8 +66,8 @@ class ModuleConfigFields
                     'validator-required-options' => [],
                 ],
                 'fields' => [
-                    'validator' => ValidateFieldsByStrategy::class,
-                    'validator-options' => [/* Details required */],
+                    'validator' => ValidateFieldsByFieldOptionsFieldsConfig::class,
+                    'validator-options' => [],
                     'validator-required' => ValidateIsRealValue::class,
                     'validator-required-options' => [],
                 ],
@@ -89,6 +91,12 @@ class ModuleConfigFields
                 ],
                 'image' => [
                     'validator' => ValidateIsStringOrNull::class,
+                    'validator-options' => [],
+                    'validator-required' => ValidateIsRealValue::class,
+                    'validator-required-options' => [],
+                ],
+                'int' => [
+                    'validator' => ValidateIsIntOrNull::class,
                     'validator-options' => [],
                     'validator-required' => ValidateIsRealValue::class,
                     'validator-required-options' => [],

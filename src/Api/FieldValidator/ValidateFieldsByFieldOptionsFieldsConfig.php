@@ -3,29 +3,27 @@
 namespace Reliv\FieldRat\Api\FieldValidator;
 
 use Reliv\ArrayProperties\Property;
-use Reliv\FieldRat\Api\Field\FindFieldsByModel;
+use Reliv\FieldRat\Api\BuildFieldRatValidationOptions;
 use Reliv\ValidationRat\Api\FieldValidator\ValidateFields;
 use Reliv\ValidationRat\Model\ValidationResultFields;
 
 /**
  * @author James Jervis - https://github.com/jerv13
  */
-class ValidateFieldsByFieldsModelName implements ValidateFields
+class ValidateFieldsByFieldOptionsFieldsConfig implements ValidateFields
 {
-    const OPTION_FIELDS_MODEL_NAME = 'fields-model-name';
+    const OPTION_FIELDS_OPTIONS = 'options';
+    const OPTION_PARENT_FIELD_CONFIG = BuildFieldRatValidationOptions::VALIDATOR_OPTION_FIELD_CONFIG;
 
     protected $findFieldsByModel;
     protected $validateFieldsByFieldsConfig;
 
     /**
-     * @param FindFieldsByModel            $findFieldsByModel
      * @param ValidateFieldsByFieldsConfig $validateFieldsByFieldsConfig
      */
     public function __construct(
-        FindFieldsByModel $findFieldsByModel,
         ValidateFieldsByFieldsConfig $validateFieldsByFieldsConfig
     ) {
-        $this->findFieldsByModel = $findFieldsByModel;
         $this->validateFieldsByFieldsConfig = $validateFieldsByFieldsConfig;
     }
 
@@ -43,22 +41,23 @@ class ValidateFieldsByFieldsModelName implements ValidateFields
         array $fields,
         array $options = []
     ): ValidationResultFields {
-        $modelName = Property::getRequired(
+        $parentOptions = Property::getArray(
             $options,
-            static::OPTION_FIELDS_MODEL_NAME
+            static::OPTION_PARENT_FIELD_CONFIG,
+            []
         );
 
-        $fieldsModel = $this->findFieldsByModel->__invoke(
-            $modelName
+        $fieldOptions = Property::getArray(
+            $parentOptions,
+            static::OPTION_FIELDS_OPTIONS,
+            []
         );
 
-        if (empty($fieldsModel)) {
-            throw new \Exception(
-                'No fields found for field model: ' . $modelName
-            );
-        }
-
-        $options[ValidateFieldsByFieldsConfig::OPTION_FIELDS_CONFIG] = $fieldsModel->getFieldsConfig();
+        $options[ValidateFieldsByFieldsConfig::OPTION_FIELDS_CONFIG] = Property::getArray(
+            $fieldOptions,
+            ValidateFieldsByFieldsConfig::OPTION_FIELDS_CONFIG,
+            []
+        );
 
         return $this->validateFieldsByFieldsConfig->__invoke(
             $fields,
