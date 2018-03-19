@@ -44,8 +44,8 @@ class BuildFieldRatValidationResult
             return new ValidationResultFieldsBasic(
                 $validationResult->isValid(),
                 $validationResult->getCode(),
-                $validationResult->getFieldResults(),
-                $details
+                $details,
+                $validationResult->getFieldResults()
             );
         }
 

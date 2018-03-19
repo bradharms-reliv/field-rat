@@ -16,6 +16,10 @@ use Reliv\FieldRat\Api\FieldType\FindFieldType;
 use Reliv\FieldRat\Api\FieldType\FindFieldTypeBasicFactory;
 use Reliv\FieldRat\Api\FieldType\ListFieldTypes;
 use Reliv\FieldRat\Api\FieldType\ListFieldTypesBasicFactory;
+use Reliv\FieldRat\Api\FieldValidator\ValidateFieldsByFieldOptionsFieldsConfig;
+use Reliv\FieldRat\Api\FieldValidator\ValidateFieldsByFieldOptionsFieldsConfigFactory;
+use Reliv\FieldRat\Api\FieldValidator\ValidateFieldsByFieldsConfig;
+use Reliv\FieldRat\Api\FieldValidator\ValidateFieldsByFieldsConfigFactory;
 use Reliv\FieldRat\Api\FieldValidator\ValidateFieldsByFieldsModelName;
 use Reliv\FieldRat\Api\FieldValidator\ValidateFieldsByFieldsModelNameFactory;
 use Reliv\FieldRat\Api\PrepareFieldDefaults;
@@ -72,6 +76,12 @@ class ModuleConfig
                     /**
                      * Api/FieldValidator
                      */
+                    ValidateFieldsByFieldOptionsFieldsConfig::class => [
+                        'factory' => ValidateFieldsByFieldOptionsFieldsConfigFactory::class,
+                    ],
+                    ValidateFieldsByFieldsConfig::class => [
+                        'factory' => ValidateFieldsByFieldsConfigFactory::class,
+                    ],
                     ValidateFieldsByFieldsModelName::class => [
                         'factory' => ValidateFieldsByFieldsModelNameFactory::class,
                     ],
